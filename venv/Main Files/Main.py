@@ -23,7 +23,8 @@ def print_grid(grid):
 # Generate and print the random grid
 random_grid = generate_random_grid()
 print("Random 3x3 Grid:\n")
-print_grid(random_grid,"\n")
+print_grid(random_grid)
+print()
 
 def find_lowest_path(grid):
     rows = len(grid)
