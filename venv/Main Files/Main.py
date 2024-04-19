@@ -29,7 +29,7 @@ def find_lowest_path(grid):
     rows = len(grid)
     cols = len(grid[0])
 
-    # Initialize a DP table to store the lowest path sums
+    # A DP table to store the lowest path sums
     dp = [[float('inf')] * cols for _ in range(rows)]
     dp[0][0] = grid[0][0]
 
