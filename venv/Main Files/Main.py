@@ -55,5 +55,5 @@ print()
 
 # Find and print the lowest path sum and path
 lowest_path_sum, path_taken = find_lowest_path(random_grid)
-print("Lowest numerical path sum:", lowest_path_sum)
 print("Path taken:", path_taken)
+print("Lowest numerical path sum:", lowest_path_sum)
