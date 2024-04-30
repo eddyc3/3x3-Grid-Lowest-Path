@@ -20,12 +20,6 @@ def print_grid(grid):
     for row in grid:
         print(" ".join(map(str, row)))
 
-# Generate and print the random grid
-random_grid = generate_random_grid()
-print("Random 3x3 Grid:\n")
-print_grid(random_grid)
-print()
-
 def find_lowest_path(grid):
     rows = len(grid)
     cols = len(grid[0])
@@ -34,17 +28,32 @@ def find_lowest_path(grid):
     dp = [[float('inf')] * cols for _ in range(rows)]
     dp[0][0] = grid[0][0]
 
-    """Fill the DP table"""
+    """Initialize a table to store the path"""
+    path = [[""] * cols for _ in range(rows)]
+    path[0][0] = str(grid[0][0])
+
+    """Fill the DP table and path table"""
     for i in range(rows):
         for j in range(cols):
             if i > 0:
-                dp[i][j] = min(dp[i][j], dp[i-1][j] + grid[i][j])
+                if dp[i-1][j] + grid[i][j] < dp[i][j]:
+                    dp[i][j] = dp[i-1][j] + grid[i][j]
+                    path[i][j] = path[i-1][j] + " " + str(grid[i][j])
             if j > 0:
-                dp[i][j] = min(dp[i][j], dp[i][j-1] + grid[i][j])
+                if dp[i][j-1] + grid[i][j] < dp[i][j]:
+                    dp[i][j] = dp[i][j-1] + grid[i][j]
+                    path[i][j] = path[i][j-1] + " " + str(grid[i][j])
 
-    """Return the lowest path sum"""
-    return dp[rows-1][cols-1]
+    """Return the lowest path sum and path"""
+    return dp[rows-1][cols-1], path[rows-1][cols-1]
 
-# Find and print the lowest path sum
-lowest_path_sum = find_lowest_path(random_grid)
+# Generate and print the random grid
+random_grid = generate_random_grid()
+print("Random 3x3 Grid:\n")
+print_grid(random_grid)
+print()
+
+# Find and print the lowest path sum and path
+lowest_path_sum, path_taken = find_lowest_path(random_grid)
 print("Lowest numerical path sum:", lowest_path_sum)
+print("Path taken:", path_taken)
